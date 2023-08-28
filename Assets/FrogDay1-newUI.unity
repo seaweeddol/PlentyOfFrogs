@@ -2154,6 +2154,13 @@ MonoBehaviour:
   MatchesContainer: {fileID: 1613432867}
   SendButton: {fileID: 714364541}
   OfflineImage: {fileID: 21300000, guid: 0365fff43022e2444a1e1a6d4281c88a, type: 3}
+  ChatOneSprite: {fileID: 21300000, guid: 1248727a5460a3c4bab7ba9eb214fe31, type: 3}
+  ChatTwoSprite: {fileID: 21300000, guid: 49d604fb52721094abe865272741392e, type: 3}
+  ChatThreeSprite: {fileID: 21300000, guid: 713a170bf4926cc4196f63f001bd8461, type: 3}
+  ChatFourSprite: {fileID: 21300000, guid: 3910d291a9851b24e8c810d42e307cce, type: 3}
+  ChatFiveSprite: {fileID: 21300000, guid: 225a26deb1a51b54289d496f727bd8b8, type: 3}
+  ChatSixSprite: {fileID: 21300000, guid: 6d388cbcdae656148a0497f3699821af, type: 3}
+  InitialChatButton: {fileID: 1828856585}
   ChatOneButton: {fileID: 2091573435}
   ChatTwoButton: {fileID: 1186666355}
   ChatThreeButton: {fileID: 404079128}
@@ -3410,6 +3417,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2761525576142405991, guid: b42f967b141e07641a7a52ea6c9405e8, type: 3}
   m_PrefabInstance: {fileID: 1284253529}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1828856585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9047715061634290104, guid: b42f967b141e07641a7a52ea6c9405e8, type: 3}
+  m_PrefabInstance: {fileID: 1281643339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1901428611
 GameObject:
   m_ObjectHideFlags: 0
@@ -3699,7 +3711,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4090095256139190024, guid: b42f967b141e07641a7a52ea6c9405e8, type: 3}
   m_PrefabInstance: {fileID: 1281643339}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1828856585}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}

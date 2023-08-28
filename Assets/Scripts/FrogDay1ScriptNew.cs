@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
+
 
 public class FrogDay1ScriptNew : MonoBehaviour
 {
@@ -23,9 +25,21 @@ public class FrogDay1ScriptNew : MonoBehaviour
         public GameObject ChattingWith;
         public GameObject MatchesContainer;
         public Button SendButton;
+
         public Sprite OfflineImage;
+
+        // public Sprite ChatOneSprite;
+        // public Sprite ChatTwoSprite;
+        // public Sprite ChatThreeSprite;
+        // public Sprite ChatFourSprite;
+        // public Sprite ChatFiveSprite;
+        // public Sprite ChatSixSprite;
+
+        public GameObject InitialChatButton;
+
         public Button ChatOneButton, ChatTwoButton, ChatThreeButton, ChatFourButton, ChatFiveButton, ChatSixButton;
         string currentMatchKey = "frog";
+
         Dictionary<string, Hashtable> matches = new Dictionary<string, Hashtable>(){
                 {"frog", new Hashtable(){
                         {"screenname", "RadPadDadChad"},
@@ -37,39 +51,7 @@ public class FrogDay1ScriptNew : MonoBehaviour
                                 "Yeah alright, I should go too. Later gator."
 
                         }},
-                        {"profileImage", "beep"},
-                        {"questionsEnabled", new bool[] {
-                                true, true, true, false
-                        }},
-                        {"chatComplete", false},
-                        {"chatHistory", new List<string>()}
-                }},
-                {"dog", new Hashtable(){
-                        {"screenname", "GuppyatHeart99"},
-                        {"intro", "Hello friend! Always great to see another frog on here! People usually complain that I do all the talking so why don't I let you ask the questions this time. I'm an open book, ask me anything!"},
-                        {"responses", new string[] {
-                                "WHOA you like insects too?! I LOVE INSECTS. Do you want to eat an insect with me? I can go get one really quick!",
-                                "A hop in the park! I love hopping around the frog park and chasing the other frogs!",
-                                "I'd live in the frog park! I love the frog park so much! I love all the other frogs and hopping around with them!",
-                                "Okay! Hope to hear from you soon! Miss you already!"
-                        }},
-                        {"profileImage", "beep"},
-                        {"questionsEnabled", new bool[] {
-                                true, true, true, false
-                        }},
-                        {"chatComplete", false},
-                        {"chatHistory", new List<string>()}
-                }},
-                {"snake", new Hashtable(){
-                        {"screenname", "jimmy_the_frog_boy"},
-                        {"intro", "hi, do you like frogs? you look nice, why don't we get to know each other :)"},
-                        {"responses", new string[] {
-                                "my diet is mostly insects :) i've also been known to eat worms here and there yess",
-                                "burrowing into the mud in my cozy and dark holes together and listening to beats away from the harshness of the world :)",
-                                "i wanna get lost and not live anywhere :) jusst wander river to river and hop away",
-                                "Ok bye :)"
-                        }},
-                        {"profileImage", "beep"},
+                        {"profileImage", "avatar1"},
                         {"questionsEnabled", new bool[] {
                                 true, true, true, false
                         }},
@@ -85,23 +67,23 @@ public class FrogDay1ScriptNew : MonoBehaviour
                                 "No cities please, just wet, wet mud. I want to live near my besties ribbit :D",
                                 "Haha alright bye! Really nice talking to you RIBBIT"
                         }},
-                        {"profileImage", "beep"},
+                        {"profileImage", "avatar2"},
                         {"questionsEnabled", new bool[] {
                                 true, true, true, false
                         }},
                         {"chatComplete", false},
                         {"chatHistory", new List<string>()}
                 }},
-                {"crow", new Hashtable(){
-                        {"screenname", "Xx_Prince.Charming_xX"},
-                        {"intro", "I saw your picture and immediately knew I had to send you a message. I've always wondered if I'd turn into a prince if a beautiful creature such as yourself kissed me, so let's see if it's a match."},
+                {"dog", new Hashtable(){
+                        {"screenname", "GuppyatHeart99"},
+                        {"intro", "Hello friend! Always great to see another frog on here! People usually complain that I do all the talking so why don't I let you ask the questions this time. I'm an open book, ask me anything!"},
                         {"responses", new string[] {
-                                "What kind of frog doesn't like insects? Is this a trick question?",
-                                "Using our beautiful tongues to catch flies at the top of a tree looking out over a beautiful swamp.",
-                                "In a beautiful castle high in the snowy mountains with fountains and rooms full of shiny trinkets and beautiful collections of gold and silver lily pads.",
-                                "Goodbye for now. I'm sure we'll have a chance to get to know each other a ribble better."
+                                "WHOA you like insects too?! I LOVE INSECTS. Do you want to eat an insect with me? I can go get one really quick!",
+                                "A hop in the park! I love hopping around the frog park and chasing the other frogs!",
+                                "I'd live in the frog park! I love the frog park so much! I love all the other frogs and hopping around with them!",
+                                "Okay! Hope to hear from you soon! Miss you already!"
                         }},
-                        {"profileImage", "beep"},
+                        {"profileImage", "avatar3"},
                         {"questionsEnabled", new bool[] {
                                 true, true, true, false
                         }},
@@ -117,7 +99,39 @@ public class FrogDay1ScriptNew : MonoBehaviour
                                 "Somewhere warm, darling. Being a toad is hard work and getting wet and slimy isn't exactly my cup of sugar, sugar.",
                                 "Bye bye, hun. Don't be a stranger :P"
                         }},
-                        {"profileImage", "beep"},
+                        {"profileImage", "avatar4"},
+                        {"questionsEnabled", new bool[] {
+                                true, true, true, false
+                        }},
+                        {"chatComplete", false},
+                        {"chatHistory", new List<string>()}
+                }},
+                {"snake", new Hashtable(){
+                        {"screenname", "jimmy_the_frog_boy"},
+                        {"intro", "hi, do you like frogs? you look nice, why don't we get to know each other :)"},
+                        {"responses", new string[] {
+                                "my diet is mostly insects :) i've also been known to eat worms here and there yess",
+                                "burrowing into the mud in my cozy and dark holes together and listening to beats away from the harshness of the world :)",
+                                "i wanna get lost and not live anywhere :) jusst wander river to river and hop away",
+                                "Ok bye :)"
+                        }},
+                        {"profileImage", "avatar5"},
+                        {"questionsEnabled", new bool[] {
+                                true, true, true, false
+                        }},
+                        {"chatComplete", false},
+                        {"chatHistory", new List<string>()}
+                }},
+                {"crow", new Hashtable(){
+                        {"screenname", "Xx_Prince.Charming_xX"},
+                        {"intro", "I saw your picture and immediately knew I had to send you a message. I've always wondered if I'd turn into a prince if a beautiful creature such as yourself kissed me, so let's see if it's a match."},
+                        {"responses", new string[] {
+                                "What kind of frog doesn't like insects? Is this a trick question?",
+                                "Using our beautiful tongues to catch flies at the top of a tree looking out over a beautiful swamp.",
+                                "In a beautiful castle high in the snowy mountains with fountains and rooms full of shiny trinkets and beautiful collections of gold and silver lily pads.",
+                                "Goodbye for now. I'm sure we'll have a chance to get to know each other a ribble better."
+                        }},
+                        {"profileImage", "avatar6"},
                         {"questionsEnabled", new bool[] {
                                 true, true, true, false
                         }},
@@ -129,12 +143,23 @@ public class FrogDay1ScriptNew : MonoBehaviour
         void Start()
         {
                 ContentTransform = Content.transform;
+                // InitializeUI("frog", ChatOneButton, "avatar1");
                 ChatOneButton.onClick.AddListener(() => selectNewChat("frog"));
+
+                EventSystem.current.SetSelectedGameObject(InitialChatButton);
+
+                // InitializeUI("catfish", ChatTwoButton, "avatar2");
+                // InitializeUI("dog", ChatThreeButton, "avatar3");
+                // InitializeUI("cat", ChatFourButton, "avatar4");
+                // InitializeUI("snake", ChatFiveButton, "avatar5");
+                // InitializeUI("crow", ChatSixButton, "avatar6");
+
                 ChatTwoButton.onClick.AddListener(() => selectNewChat("catfish"));
                 ChatThreeButton.onClick.AddListener(() => selectNewChat("dog"));
                 ChatFourButton.onClick.AddListener(() => selectNewChat("cat"));
                 ChatFiveButton.onClick.AddListener(() => selectNewChat("snake"));
                 ChatSixButton.onClick.AddListener(() => selectNewChat("crow"));
+
                 initiateDialogue((string)matches[currentMatchKey]["intro"]);
         }
 
@@ -282,6 +307,7 @@ public class FrogDay1ScriptNew : MonoBehaviour
                                 string currentChatItem = ((List<string>)matches[currentMatchKey]["chatHistory"])[i];
                                 if (i % 2 == 0) {
                                         DateDialogue.transform.Find("MaxWidthContainer/DialogueText").GetComponent<Text>().text = currentChatItem;
+                                        InitializeSprite();
                                         Instantiate(DateDialogue, ContentTransform);
                                 } else {
                                         PlayerDialogue.transform.Find("MaxWidthContainer/DialogueText").GetComponent<Text>().text = currentChatItem;
@@ -324,11 +350,21 @@ public class FrogDay1ScriptNew : MonoBehaviour
                 }
         }
 
+
+        private void InitializeSprite() {
+                Texture2D texture2D = Resources.Load<Texture2D>((string) matches[currentMatchKey]["profileImage"]);
+                Sprite sprite = Sprite.Create(texture2D, new Rect(0.0f, 0.0f, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 100.0f);
+                DateDialogue.transform.Find("Avatar").GetComponent<Image>().sprite = sprite;
+        }
+
+
         private void showDialogue(string username, string text)
         {
                 if (username == (string)matches[currentMatchKey]["screenname"])
                 {
                         DateDialogue.transform.Find("MaxWidthContainer/DialogueText").GetComponent<Text>().text = text;
+                        // DateDialogue.transform.Find("Avatar").GetComponent<Image>().sprite = ((SpriteRenderer)matches[currentMatchKey]["profileImage"]).sprite;
+                        InitializeSprite();
                         Instantiate(DateDialogue, ContentTransform);
                 }
                 else
