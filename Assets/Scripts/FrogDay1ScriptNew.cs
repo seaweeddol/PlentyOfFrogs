@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
 using UnityEngine.EventSystems;
-
 
 public class FrogDay1ScriptNew : MonoBehaviour
 {
@@ -27,14 +25,6 @@ public class FrogDay1ScriptNew : MonoBehaviour
         public Button SendButton;
 
         public Sprite OfflineImage;
-
-        // public Sprite ChatOneSprite;
-        // public Sprite ChatTwoSprite;
-        // public Sprite ChatThreeSprite;
-        // public Sprite ChatFourSprite;
-        // public Sprite ChatFiveSprite;
-        // public Sprite ChatSixSprite;
-
         public GameObject InitialChatButton;
 
         public Button ChatOneButton, ChatTwoButton, ChatThreeButton, ChatFourButton, ChatFiveButton, ChatSixButton;
@@ -143,17 +133,9 @@ public class FrogDay1ScriptNew : MonoBehaviour
         void Start()
         {
                 ContentTransform = Content.transform;
-                // InitializeUI("frog", ChatOneButton, "avatar1");
-                ChatOneButton.onClick.AddListener(() => selectNewChat("frog"));
-
                 EventSystem.current.SetSelectedGameObject(InitialChatButton);
 
-                // InitializeUI("catfish", ChatTwoButton, "avatar2");
-                // InitializeUI("dog", ChatThreeButton, "avatar3");
-                // InitializeUI("cat", ChatFourButton, "avatar4");
-                // InitializeUI("snake", ChatFiveButton, "avatar5");
-                // InitializeUI("crow", ChatSixButton, "avatar6");
-
+                ChatOneButton.onClick.AddListener(() => selectNewChat("frog"));
                 ChatTwoButton.onClick.AddListener(() => selectNewChat("catfish"));
                 ChatThreeButton.onClick.AddListener(() => selectNewChat("dog"));
                 ChatFourButton.onClick.AddListener(() => selectNewChat("cat"));
@@ -162,16 +144,6 @@ public class FrogDay1ScriptNew : MonoBehaviour
 
                 initiateDialogue((string)matches[currentMatchKey]["intro"]);
         }
-
-        // initiate chat with correct dialogue
-
-        // var to hold if chat is complete
-        // var to hold chat history/order for each match (ie answers and questions in the order you asked them)
-        // select new match function
-        // update matches.currentChat "chatComplete" to true
-        // update matches.currentChat to new selection
-        // reset Options
-        // initiate initial dialogue
 
         public void SendQuestion()
         {
@@ -200,8 +172,6 @@ public class FrogDay1ScriptNew : MonoBehaviour
                         StartCoroutine(DisableSendButton());
                         OptionsContainer.value = 0;
                         OptionsContainer.captionText.text = "Type here...";
-
-                        // if first three questions have been asked
                 }
         }
 
@@ -265,6 +235,7 @@ public class FrogDay1ScriptNew : MonoBehaviour
                 yield return new WaitForSeconds(1);
                 showDialogue(matchName, matchName + " is typing...");
                 yield return new WaitForSeconds(2);
+                
                 // Destroy last child "user is typing..."
                 Destroy(ContentTransform.GetChild(ContentTransform.childCount - 1).gameObject);
                 yield return new WaitForSeconds(0.1f);
@@ -301,36 +272,32 @@ public class FrogDay1ScriptNew : MonoBehaviour
                         ((List<string>)matches[currentMatchKey]["chatHistory"]).Add(initialDialogue);
                 } else {
                 // initiate chat history
-                // need to loop through chat history, and create dialogue box based on index
-                // odd is match, even is user
                         for (int i = 0; i < ((List<string>)matches[currentMatchKey]["chatHistory"]).Count; i++)    {
                                 string currentChatItem = ((List<string>)matches[currentMatchKey]["chatHistory"])[i];
                                 if (i % 2 == 0) {
-                                        DateDialogue.transform.Find("MaxWidthContainer/DialogueText").GetComponent<Text>().text = currentChatItem;
-                                        InitializeSprite();
-                                        Instantiate(DateDialogue, ContentTransform);
+                                        InitDialogue(DateDialogue, currentChatItem);
                                 } else {
-                                        PlayerDialogue.transform.Find("MaxWidthContainer/DialogueText").GetComponent<Text>().text = currentChatItem;
-                                        Instantiate(PlayerDialogue, ContentTransform);
+                                        InitDialogue(PlayerDialogue, currentChatItem);
                                 }
                                 Invoke("UpdateScrollViewSize", 0.1f);
                                 Invoke("scrollToBottom", 0.1f);
                         }
-                }
 
-                // clear current chat options
-                while (OptionsContainer.options.Count > 0)
-                {
-                        OptionsContainer.options.RemoveAt(0);
+                        // TODO: if chat is complete, also add "user has left chat" line
                 }
 
                 // enable dropdown if chat is not completed
                 if(!((bool) matches[currentMatchKey]["chatComplete"])) {
+                        // clear current chat options
+                        while (OptionsContainer.options.Count > 0)
+                        {
+                                OptionsContainer.options.RemoveAt(0);
+                        }
+
                         // enable dropdown and send button
                         OptionsContainer.interactable = true;
                         SendButton.interactable = true;
 
-                        // iterate through questionsEnabled
                         // add remaining options for current chat
                         for (int i = 0; i < Options.Count; i++)
                         {
@@ -350,7 +317,6 @@ public class FrogDay1ScriptNew : MonoBehaviour
                 }
         }
 
-
         private void InitializeSprite() {
                 Texture2D texture2D = Resources.Load<Texture2D>((string) matches[currentMatchKey]["profileImage"]);
                 Sprite sprite = Sprite.Create(texture2D, new Rect(0.0f, 0.0f, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 100.0f);
@@ -362,25 +328,23 @@ public class FrogDay1ScriptNew : MonoBehaviour
         {
                 if (username == (string)matches[currentMatchKey]["screenname"])
                 {
-                        DateDialogue.transform.Find("MaxWidthContainer/DialogueText").GetComponent<Text>().text = text;
-                        // DateDialogue.transform.Find("Avatar").GetComponent<Image>().sprite = ((SpriteRenderer)matches[currentMatchKey]["profileImage"]).sprite;
-                        InitializeSprite();
-                        Instantiate(DateDialogue, ContentTransform);
+                        InitDialogue(DateDialogue, text);
                 }
                 else
                 {
-                        PlayerDialogue.transform.Find("MaxWidthContainer/DialogueText").GetComponent<Text>().text = text;
-                        Instantiate(PlayerDialogue, ContentTransform);
+                        InitDialogue(PlayerDialogue, text);
                 }
                 Invoke("UpdateScrollViewSize", 0.1f);
                 Invoke("scrollToBottom", 0.1f);
         }
 
-        IEnumerator InitDialogue(GameObject dialogue, string text)
+        private void InitDialogue(GameObject dialogue, string text)
         {
                 dialogue.transform.Find("MaxWidthContainer/DialogueText").GetComponent<Text>().text = text;
+                if (dialogue == DateDialogue) {
+                        InitializeSprite();
+                }
                 Instantiate(dialogue, ContentTransform);
-                yield return new WaitForEndOfFrame();
         }
 
         private void setOptionsState(string selectedOption)
