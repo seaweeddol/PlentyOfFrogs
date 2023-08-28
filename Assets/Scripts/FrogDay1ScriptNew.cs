@@ -274,20 +274,20 @@ public class FrogDay1ScriptNew : MonoBehaviour
                 ((List<string>)matches[currentMatchKey]["chatHistory"]).Add(playerText);
                 ((List<string>)matches[currentMatchKey]["chatHistory"]).Add(dateText);
 
-                // enable chat selections
-                for (int i = 0; i < MatchesContainer.transform.childCount; i++) {
-                        Button child = MatchesContainer.transform.GetChild(i).GetComponent<Button>();
-                        child.interactable = true;
-                }
-
                 if ((bool) matches[currentMatchKey]["chatComplete"])
                 {
-                        yield return new WaitForSeconds(2);
+                        yield return new WaitForSeconds(1);
                         UserLeftChat.transform.GetComponent<Text>().text = matches[currentMatchKey]["screenname"] + " has left chat.";
                         Instantiate(UserLeftChat, ContentTransform);
                         Invoke("scrollToBottom", 0.1f);
                         UpdateOnlineStatus();
                         matches[currentMatchKey]["chatComplete"] = true;
+                }
+
+                // enable chat selections
+                for (int i = 0; i < MatchesContainer.transform.childCount; i++) {
+                        Button child = MatchesContainer.transform.GetChild(i).GetComponent<Button>();
+                        child.interactable = true;
                 }
         }
 
