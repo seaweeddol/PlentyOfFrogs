@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 912bf2d5c9c78284483445265d7474c0
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Lady Ice - Extra Light
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 105978c6540a7ed49884d966a75c1abb, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

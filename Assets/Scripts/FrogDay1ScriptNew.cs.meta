@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 159a2e09e8ac2aa4c8b3b1789178b1c5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - OptionsContainer: {instanceID: 0}
+  - DateDialogue: {instanceID: 0}
+  - PlayerDialogue: {instanceID: 0}
+  - Content: {instanceID: 0}
+  - UserLeftChat: {instanceID: 0}
+  - SendButton: {instanceID: 0}
+  - OnlineText: {instanceID: 0}
+  - OnlineImage: {instanceID: 0}
+  - OfflineImage: {fileID: 21300000, guid: 0365fff43022e2444a1e1a6d4281c88a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
